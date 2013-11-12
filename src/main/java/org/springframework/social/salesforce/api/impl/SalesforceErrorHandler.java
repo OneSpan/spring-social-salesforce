@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.social.*;
 import org.springframework.social.salesforce.api.InvalidIDException;
+import org.springframework.social.salesforce.api.Salesforce;
 import org.springframework.web.client.DefaultResponseErrorHandler;
 
 import java.io.IOException;
@@ -35,15 +36,15 @@ public class SalesforceErrorHandler extends DefaultResponseErrorHandler {
 
     private void handleSalesforceError(HttpStatus statusCode, Map<String, Object> errorDetails) {
         if (statusCode.equals(HttpStatus.NOT_FOUND)) {
-            throw new ResourceNotFoundException(generateMessage(errorDetails));
+            throw new ResourceNotFoundException(Salesforce.PROVIDER_ID, generateMessage(errorDetails));
         } else if (statusCode.equals(HttpStatus.SERVICE_UNAVAILABLE)) {
-            throw new RateLimitExceededException();
+            throw new RateLimitExceededException(Salesforce.PROVIDER_ID);
         } else if (statusCode.equals(HttpStatus.INTERNAL_SERVER_ERROR)) {
-            throw new InternalServerErrorException(errorDetails == null ? "Contact Salesforce administrator." : generateMessage(errorDetails));
+            throw new InternalServerErrorException(Salesforce.PROVIDER_ID, errorDetails == null ? "Contact Salesforce administrator." : generateMessage(errorDetails));
         } else if (statusCode.equals(HttpStatus.BAD_REQUEST)) {
             throw new InvalidIDException(generateMessage(errorDetails));
         } else if (statusCode.equals(HttpStatus.UNAUTHORIZED)) {
-            throw new InvalidAuthorizationException(generateMessage(errorDetails));
+            throw new InvalidAuthorizationException(Salesforce.PROVIDER_ID, generateMessage(errorDetails));
         } else if (statusCode.equals(HttpStatus.FORBIDDEN)) {
             throw new InsufficientPermissionException(generateMessage(errorDetails));
         }
@@ -54,9 +55,9 @@ public class SalesforceErrorHandler extends DefaultResponseErrorHandler {
             super.handleError(response);
         } catch (Exception e) {
             if (errorDetails != null) {
-                throw new UncategorizedApiException(generateMessage(errorDetails), e);
+                throw new UncategorizedApiException(Salesforce.PROVIDER_ID, generateMessage(errorDetails), e);
             } else {
-                throw new UncategorizedApiException("No error details from Salesforce.", e);
+                throw new UncategorizedApiException(Salesforce.PROVIDER_ID, "No error details from Salesforce.", e);
             }
         }
     }

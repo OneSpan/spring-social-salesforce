@@ -8,7 +8,7 @@ import org.springframework.social.ApiException;
 public class InvalidIDException extends ApiException {
 
     public InvalidIDException(String message) {
-        super(message);
+        super(Salesforce.PROVIDER_ID, message);
     }
 
 }

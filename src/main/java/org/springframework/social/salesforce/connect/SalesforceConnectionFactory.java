@@ -8,13 +8,14 @@ import org.springframework.social.salesforce.api.Salesforce;
  */
 public class SalesforceConnectionFactory extends OAuth2ConnectionFactory<Salesforce> {
 
+
     public SalesforceConnectionFactory(String clientId, String clientSecret) {
-        super("salesforce", new SalesforceServiceProvider(clientId, clientSecret),
+        super(Salesforce.PROVIDER_ID, new SalesforceServiceProvider(clientId, clientSecret),
                 new SalesforceAdapter());
     }
 
     public SalesforceConnectionFactory(String clientId, String clientSecret, String authorizeUrl, String tokenUrl) {
-        super("salesforce", new SalesforceServiceProvider(clientId, clientSecret,
+        super(Salesforce.PROVIDER_ID, new SalesforceServiceProvider(clientId, clientSecret,
                 authorizeUrl, tokenUrl), new SalesforceAdapter());
     }
 

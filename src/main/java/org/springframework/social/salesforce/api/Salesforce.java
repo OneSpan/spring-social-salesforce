@@ -11,6 +11,7 @@ import java.util.List;
  * @author Umut Utkan
  */
 public interface Salesforce extends ApiBinding {
+    public static final String PROVIDER_ID = "salesforce";
 
     public ApiOperations apiOperations();
 
