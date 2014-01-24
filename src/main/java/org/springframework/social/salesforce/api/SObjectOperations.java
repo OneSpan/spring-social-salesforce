@@ -21,6 +21,9 @@ public interface SObjectOperations {
 
     public InputStream getBlob(String name, String id, String field);
 
+    public byte[] getBlobByteArray(String name, String id, String field);
+
     Map<?, ?> create(String name, Map<String, String> fields);
 
+    public void patchSObject(String name, String id, Map<String, String> fields);
 }

@@ -4,6 +4,7 @@ import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.type.CollectionType;
 import org.codehaus.jackson.map.type.TypeFactory;
+import org.springframework.http.converter.ByteArrayHttpMessageConverter;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJacksonHttpMessageConverter;
@@ -105,7 +106,7 @@ public class SalesforceTemplate extends AbstractOAuth2ApiBinding implements Sale
         messageConverters.add(new StringHttpMessageConverter());
         messageConverters.add(getFormMessageConverter());
         messageConverters.add(getJson1MessageConverter());
-        messageConverters.add(getByteArrayMessageConverter());
+        messageConverters.add(new ByteArrayHttpMessageConverter());
         return messageConverters;
     }
 

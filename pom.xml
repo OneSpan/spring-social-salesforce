@@ -4,7 +4,7 @@
 
     <groupId>org.springframework.social</groupId>
     <artifactId>spring-social-salesforce</artifactId>
-    <version>1.1.0.BUILD-SNAPSHOT</version>
+    <version>1.1.6</version>
     <packaging>jar</packaging>
 
     <name>spring-social-salesforce</name>
@@ -81,5 +81,13 @@
              <snapshots><enabled>false</enabled></snapshots>
          </repository>
     </repositories>
+
+    <distributionManagement>
+        <repository>
+            <id>central</id>
+            <name>eslbuild-releases</name>
+            <url>http://eslbuild.silanis.com:8080/artifactory/libs-release-local</url>
+        </repository>
+    </distributionManagement>
 
 </project>

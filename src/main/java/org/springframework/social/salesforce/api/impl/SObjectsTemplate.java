@@ -1,10 +1,7 @@
 package org.springframework.social.salesforce.api.impl;
 
 import org.codehaus.jackson.JsonNode;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
+import org.springframework.http.*;
 import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.social.salesforce.api.SObjectDetail;
 import org.springframework.social.salesforce.api.SObjectOperations;
@@ -12,11 +9,13 @@ import org.springframework.social.salesforce.api.SObjectSummary;
 import org.springframework.social.salesforce.api.Salesforce;
 import org.springframework.social.support.URIBuilder;
 import org.springframework.util.StringUtils;
+import org.springframework.web.client.HttpMessageConverterExtractor;
 import org.springframework.web.client.ResponseExtractor;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -78,6 +77,18 @@ public class SObjectsTemplate extends AbstractSalesForceOperations<Salesforce> i
     }
 
     @Override
+    public byte[] getBlobByteArray(String name, String id, String field) {
+        requireAuthorization();
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(Collections.singletonList(MediaType.valueOf("application/octetstream")));
+        ResponseEntity<byte[]> exchange = restTemplate.exchange(api.getBaseUrl() + "/v23.0/sobjects/{name}/{id}/{field}",
+                HttpMethod.GET, new HttpEntity<byte[]>(headers),
+                byte[].class, name, id, field);
+        return exchange.getBody();
+    }
+
+    @Override
     @SuppressWarnings("rawtypes")
     public Map<?, ?> create(String name, Map<String, String> fields) {
         requireAuthorization();
@@ -85,6 +96,15 @@ public class SObjectsTemplate extends AbstractSalesForceOperations<Salesforce> i
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<Map> entity = new HttpEntity<Map>(fields, headers);
         return restTemplate.postForObject(api.getBaseUrl() + "/v23.0/sobjects/{name}", entity, Map.class, name);
+    }
+
+    @Override
+    public void patchSObject(String name, String id, Map<String, String> fields) {
+        requireAuthorization();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<Map> entity = new HttpEntity<Map>(fields, headers);
+        restTemplate.exchange(api.getBaseUrl() + "/v23.0/sobjects/{name}/{id}", HttpMethod.PATCH, entity, Void.class, name, id);
     }
 
 }
