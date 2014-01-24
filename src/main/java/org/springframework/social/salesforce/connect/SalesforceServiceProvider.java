@@ -13,8 +13,8 @@ public class SalesforceServiceProvider extends AbstractOAuth2ServiceProvider<Sal
 
     public SalesforceServiceProvider(String clientId, String clientSecret) {
         this(clientId, clientSecret,
-                "https://login.salesforce.com/services/oauth2/authorize",
-                "https://login.salesforce.com/services/oauth2/token");
+                "https://test.salesforce.com/services/oauth2/authorize",
+                "https://test.salesforce.com/services/oauth2/token");
     }
 
     public SalesforceServiceProvider(String clientId, String clientSecret, String authorizeUrl, String tokenUrl) {
