@@ -13,6 +13,7 @@ import org.springframework.social.oauth2.AbstractOAuth2ApiBinding;
 import org.springframework.social.oauth2.OAuth2Version;
 import org.springframework.social.salesforce.api.*;
 import org.springframework.social.salesforce.api.impl.json.SalesforceModule;
+import org.springframework.social.salesforce.api.test.SalesforceTest;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
@@ -25,7 +26,7 @@ import java.util.List;
  *
  * @author Umut Utkan
  */
-public class SalesforceTemplate extends AbstractOAuth2ApiBinding implements Salesforce {
+public class SalesforceTemplate extends AbstractOAuth2ApiBinding implements Salesforce, SalesforceTest {
 
     private static final String INSTANCE_URL = "https://na1.salesforce.com";
 
