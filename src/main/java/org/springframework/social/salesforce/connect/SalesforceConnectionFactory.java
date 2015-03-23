@@ -15,8 +15,8 @@ public class SalesforceConnectionFactory extends OAuth2ConnectionFactory<Salesfo
     }
 
     public SalesforceConnectionFactory(String clientId, String clientSecret, String authorizeUrl, String tokenUrl) {
-        super(Salesforce.PROVIDER_ID, new SalesforceServiceProvider(clientId, clientSecret,
-                authorizeUrl, tokenUrl), new SalesforceAdapter());
+        super(Salesforce.PROVIDER_ID, new SalesforceServiceProvider(clientId, clientSecret
+        ), new SalesforceAdapter());
     }
 
 }

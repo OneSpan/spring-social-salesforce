@@ -1,8 +1,8 @@
 package org.springframework.social.salesforce.connect.test;
 
 import org.springframework.social.oauth2.AbstractOAuth2ServiceProvider;
-import org.springframework.social.salesforce.api.test.SalesforceTest;
 import org.springframework.social.salesforce.api.impl.SalesforceTemplate;
+import org.springframework.social.salesforce.api.test.SalesforceTest;
 import org.springframework.social.salesforce.connect.SalesforceOAuth2Template;
 
 /**
@@ -10,14 +10,11 @@ import org.springframework.social.salesforce.connect.SalesforceOAuth2Template;
  */
 public class SalesforceTestServiceProvider extends AbstractOAuth2ServiceProvider<SalesforceTest> {
 
-    public SalesforceTestServiceProvider(String clientId, String clientSecret) {
-        this(clientId, clientSecret,
-             "https://test.salesforce.com/services/oauth2/authorize",
-             "https://test.salesforce.com/services/oauth2/token");
-    }
+    public static final String BASE_URL = "https://test.salesforce.com/";
 
-    public SalesforceTestServiceProvider(String clientId, String clientSecret, String authorizeUrl, String tokenUrl) {
-        super(new SalesforceOAuth2Template(clientId, clientSecret, authorizeUrl, tokenUrl));
+
+    public SalesforceTestServiceProvider(String clientId, String clientSecret) {
+        super(new SalesforceOAuth2Template(clientId, clientSecret, BASE_URL));
     }
 
 
