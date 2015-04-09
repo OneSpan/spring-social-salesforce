@@ -4,17 +4,17 @@ import org.springframework.social.oauth2.AccessGrant;
 import org.springframework.social.oauth2.GrantType;
 import org.springframework.social.oauth2.OAuth2Parameters;
 import org.springframework.social.oauth2.OAuth2Template;
-import org.springframework.util.StringUtils;
 
 import java.net.URI;
-import java.net.URLDecoder;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static java.net.URLDecoder.decode;
 import static java.nio.charset.StandardCharsets.UTF_8;
+import static org.springframework.util.StringUtils.isEmpty;
 
 /**
  * Salesforce OAuth2Template implementation.
@@ -26,8 +26,8 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 public class SalesforceOAuth2Template extends OAuth2Template {
 
     private static final Pattern TLD_REGEX = Pattern.compile(".*?([^.]+\\.[^.]+)");
-
     private static final List<String> VALID_SALESFORCE_DOMAINS = Arrays.asList("force.com", "salesforce.com");
+
 
     static final String AUTHORIZE_PATH = "services/oauth2/authorize";
     static final String TOKEN_PATH = "services/oauth2/token";
@@ -49,34 +49,35 @@ public class SalesforceOAuth2Template extends OAuth2Template {
 
         String endpointUrlParam = parameters.getFirst("endpoint");
 
-        /* Endpoint parameter should be removed before building the Authorize URL:
-           We are only using it for use with custom SF domains. */
+        /** Endpoint parameter should be removed before building the Authorize URL:
+           We are only using it for use with custom SF domains. **/
         parameters.remove("endpoint");
 
         final String baseAuthorizeURL = super.buildAuthorizeUrl(grantType, parameters);
 
-        if (StringUtils.isEmpty(endpointUrlParam)) {
+        if (isEmpty(endpointUrlParam)) {
             return baseAuthorizeURL;
         } else {
 
             boolean isValidSalesforceHostname;
-            String endpointUrl;
-            try {
-                endpointUrl = URLDecoder.decode(endpointUrlParam, UTF_8.name());
-                final URI uri = new URI(endpointUrl);
-                final String urlHost = uri.getHost();
+            final String endpointUrlHost;
+            final String protocol;
 
-                final Matcher m = TLD_REGEX.matcher(urlHost);
+            try {
+                final URI uri = new URI(decode(endpointUrlParam, UTF_8.name()));
+                endpointUrlHost = uri.getHost();
+                protocol = getProtocol(uri);
+
+                final Matcher m = TLD_REGEX.matcher(endpointUrlHost);
                 isValidSalesforceHostname = (m.matches() && VALID_SALESFORCE_DOMAINS.contains(m.group(1)));
 
             } catch (Exception e) {
                 return baseAuthorizeURL;
             }
 
-            return isValidSalesforceHostname ? baseAuthorizeURL.replaceFirst(baseUrl, endpointUrl) : baseAuthorizeURL;
+            return isValidSalesforceHostname ? baseAuthorizeURL.replaceFirst(baseUrl, protocol + verifyURLEndsWithSlash(endpointUrlHost)) : baseAuthorizeURL;
         }
     }
-
 
     @Override
     protected AccessGrant createAccessGrant(String accessToken, String scope, String refreshToken, Long expiresIn, Map<String, Object> response) {
@@ -85,8 +86,17 @@ public class SalesforceOAuth2Template extends OAuth2Template {
         return super.createAccessGrant(accessToken, scope, refreshToken, expiresIn, response);
     }
 
+    private String getProtocol(URI uri) {
+        return uri.getScheme() + "://";
+    }
+
+
     public String getInstanceUrl() {
         return instanceUrl;
+    }
+
+    private String verifyURLEndsWithSlash(String endpointUrl) {
+        return endpointUrl.endsWith("/") ? endpointUrl : endpointUrl + "/";
     }
 
 }
