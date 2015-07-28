@@ -32,9 +32,18 @@ public class SalesforceAdapter implements ApiAdapter<Salesforce> {
 
     public UserProfile fetchUserProfile(Salesforce salesforce) {
         SalesforceProfile profile = salesforce.chatterOperations().getUserProfile();
-        return new UserProfileBuilder().setName(profile.getFirstName()).setFirstName(profile.getFirstName())
-                .setLastName(profile.getLastName()).setEmail(profile.getEmail())
-                .setUsername(profile.getEmail()).build();
+
+        final String firstName = profile.getFirstName();
+        final String lastName = profile.getLastName();
+        final String email = profile.getEmail();
+
+        return new UserProfileBuilder()
+                .setName(firstName)
+                .setFirstName(firstName)
+                .setLastName(lastName)
+                .setEmail(email)
+                .setUsername(email)
+                .build();
     }
 
 

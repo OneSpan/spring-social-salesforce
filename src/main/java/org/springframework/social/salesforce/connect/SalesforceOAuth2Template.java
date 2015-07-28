@@ -25,12 +25,13 @@ import static org.springframework.util.StringUtils.isEmpty;
  */
 public class SalesforceOAuth2Template extends OAuth2Template {
 
-    private static final Pattern TLD_REGEX = Pattern.compile(".*?([^.]+\\.[^.]+)");
+    private static final Pattern HOSTNAME_REGEX = Pattern.compile(".*?([^.]+\\.[^.]+)");
     private static final List<String> VALID_SALESFORCE_DOMAINS = Arrays.asList("force.com", "salesforce.com");
 
 
     static final String AUTHORIZE_PATH = "services/oauth2/authorize";
     static final String TOKEN_PATH = "services/oauth2/token";
+    static final String ENDPOINT = "endpoint";
 
 
     private String instanceUrl = null;
@@ -47,11 +48,11 @@ public class SalesforceOAuth2Template extends OAuth2Template {
     @Override
     public String buildAuthorizeUrl(GrantType grantType, OAuth2Parameters parameters) {
 
-        String endpointUrlParam = parameters.getFirst("endpoint");
+        String endpointUrlParam = parameters.getFirst(ENDPOINT);
 
         /** Endpoint parameter should be removed before building the Authorize URL:
            We are only using it for use with custom SF domains. **/
-        parameters.remove("endpoint");
+        parameters.remove(ENDPOINT);
 
         final String baseAuthorizeURL = super.buildAuthorizeUrl(grantType, parameters);
 
@@ -68,7 +69,7 @@ public class SalesforceOAuth2Template extends OAuth2Template {
                 endpointUrlHost = uri.getHost();
                 protocol = getProtocol(uri);
 
-                final Matcher m = TLD_REGEX.matcher(endpointUrlHost);
+                final Matcher m = HOSTNAME_REGEX.matcher(endpointUrlHost);
                 isValidSalesforceHostname = (m.matches() && VALID_SALESFORCE_DOMAINS.contains(m.group(1)));
 
             } catch (Exception e) {
