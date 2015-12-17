@@ -1,6 +1,6 @@
 package org.springframework.social.salesforce.api;
 
-import org.codehaus.jackson.JsonNode;
+import com.fasterxml.jackson.databind.JsonNode;
 import org.springframework.social.ApiBinding;
 
 import java.util.List;
@@ -11,26 +11,27 @@ import java.util.List;
  * @author Umut Utkan
  */
 public interface Salesforce extends ApiBinding {
-    public static final String PROVIDER_ID = "salesforce";
 
-    public ApiOperations apiOperations();
+    String PROVIDER_ID = "salesforce";
 
-    public ChatterOperations chatterOperations();
+    ApiOperations apiOperations();
 
-    public QueryOperations queryOperations();
+    ChatterOperations chatterOperations();
 
-    public RecentOperations recentOperations();
+    QueryOperations queryOperations();
 
-    public SearchOperations searchOperations();
+    RecentOperations recentOperations();
 
-    public SObjectOperations sObjectsOperations();
+    SearchOperations searchOperations();
 
-    public <T> List<T> readList(JsonNode jsonNode, Class<T> type);
+    SObjectOperations sObjectsOperations();
 
-    public <T> T readObject(JsonNode jsonNode, Class<T> type);
+    <T> List<T> readList(JsonNode jsonNode, Class<T> type);
 
-    public String getBaseUrl();
+    <T> T readObject(JsonNode jsonNode, Class<T> type);
 
-    public String getInstanceUrl();
+    String getBaseUrl();
+
+    String getInstanceUrl();
 
 }

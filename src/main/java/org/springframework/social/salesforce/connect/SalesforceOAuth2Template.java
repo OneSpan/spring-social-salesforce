@@ -13,7 +13,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static java.net.URLDecoder.decode;
-import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.springframework.util.StringUtils.isEmpty;
 
 /**
@@ -32,6 +31,7 @@ public class SalesforceOAuth2Template extends OAuth2Template {
     static final String AUTHORIZE_PATH = "services/oauth2/authorize";
     static final String TOKEN_PATH = "services/oauth2/token";
     static final String ENDPOINT = "endpoint";
+    private static final String UTF_8 = "UTF8";
 
 
     private String instanceUrl = null;
@@ -50,8 +50,8 @@ public class SalesforceOAuth2Template extends OAuth2Template {
 
         String endpointUrlParam = parameters.getFirst(ENDPOINT);
 
-        /** Endpoint parameter should be removed before building the Authorize URL:
-           We are only using it for use with custom SF domains. **/
+        /* Endpoint parameter should be removed before building the Authorize URL:
+         We are only using it for use with custom SF domains. */
         parameters.remove(ENDPOINT);
 
         final String baseAuthorizeURL = super.buildAuthorizeUrl(grantType, parameters);
@@ -65,7 +65,7 @@ public class SalesforceOAuth2Template extends OAuth2Template {
             final String protocol;
 
             try {
-                final URI uri = new URI(decode(endpointUrlParam, UTF_8.name()));
+                final URI uri = new URI(decode(endpointUrlParam, UTF_8));
                 endpointUrlHost = uri.getHost();
                 protocol = getProtocol(uri);
 
@@ -97,7 +97,7 @@ public class SalesforceOAuth2Template extends OAuth2Template {
     }
 
     private String verifyURLEndsWithSlash(String endpointUrl) {
-        return endpointUrl.endsWith("/") ? endpointUrl : endpointUrl + "/";
+        return endpointUrl.endsWith("/") ? endpointUrl : endpointUrl + '/';
     }
 
 }

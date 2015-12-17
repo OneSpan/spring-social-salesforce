@@ -1,6 +1,7 @@
 package org.springframework.social.salesforce.api.impl;
 
 import org.junit.Test;
+import org.springframework.http.MediaType;
 import org.springframework.social.salesforce.api.SalesforceProfile;
 import org.springframework.social.salesforce.api.Status;
 
@@ -8,8 +9,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.http.HttpMethod.POST;
-import static org.springframework.social.test.client.RequestMatchers.*;
-import static org.springframework.social.test.client.ResponseCreators.withResponse;
+import static org.springframework.test.web.client.match.RequestMatchers.*;
+import static org.springframework.test.web.client.response.ResponseCreators.withSuccess;
+
 
 /**
  * @author Umut Utkan
@@ -20,7 +22,7 @@ public class ChatterTemplateTest extends AbstractSalesforceTest {
     public void getProfile() {
         mockServer.expect(requestTo("https://na7.salesforce.com/services/data/v23.0/chatter/users/me"))
                 .andExpect(method(GET))
-                .andRespond(withResponse(loadResource("profile.json"), responseHeaders));
+                .andRespond(withSuccess(loadResource("profile.json"), MediaType.APPLICATION_JSON).headers(responseHeaders));
         SalesforceProfile profile = salesforce.chatterOperations().getUserProfile();
         assertEquals("Umut Utkan", profile.getFullName());
         assertEquals("umut.utkan@foo.com", profile.getEmail());
@@ -35,7 +37,7 @@ public class ChatterTemplateTest extends AbstractSalesforceTest {
     public void getStatus() {
         mockServer.expect(requestTo("https://na7.salesforce.com/services/data/v23.0/chatter/users/me/status"))
                 .andExpect(method(GET))
-                .andRespond(withResponse(loadResource("chatter-status.json"), responseHeaders));
+                .andRespond(withSuccess(loadResource("chatter-status.json"), MediaType.APPLICATION_JSON).headers(responseHeaders));
 
         Status status = salesforce.chatterOperations().getStatus();
         assertNotNull(status);
@@ -46,8 +48,8 @@ public class ChatterTemplateTest extends AbstractSalesforceTest {
     public void updateStatus() {
         mockServer.expect(requestTo("https://na7.salesforce.com/services/data/v23.0/chatter/users/me/status"))
                 .andExpect(method(POST))
-                .andExpect(body("text=Updating+status+via+%23spring-social-salesforce%21"))
-                .andRespond(withResponse(loadResource("chatter-status.json"), responseHeaders));
+                .andExpect(content().string("text=Updating+status+via+%23spring-social-salesforce%21"))
+                .andRespond(withSuccess(loadResource("chatter-status.json"), MediaType.APPLICATION_JSON).headers(responseHeaders));
 
         Status status = salesforce.chatterOperations().updateStatus("Updating status via #spring-social-salesforce!");
         assertNotNull(status);

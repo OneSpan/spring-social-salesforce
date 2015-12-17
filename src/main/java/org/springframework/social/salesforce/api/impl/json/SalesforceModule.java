@@ -1,7 +1,8 @@
 package org.springframework.social.salesforce.api.impl.json;
 
-import org.codehaus.jackson.Version;
-import org.codehaus.jackson.map.module.SimpleModule;
+import com.fasterxml.jackson.core.Version;
+import com.fasterxml.jackson.databind.Module;
+import com.fasterxml.jackson.databind.module.SimpleModule;
 import org.springframework.social.salesforce.api.*;
 
 /**
@@ -16,7 +17,7 @@ public class SalesforceModule extends SimpleModule {
     }
 
     @Override
-    public void setupModule(SetupContext context) {
+    public void setupModule(Module.SetupContext context) {
         super.setupModule(context);
 
         context.setMixInAnnotations(ApiVersion.class, ApiVersionMixin.class);

@@ -8,9 +8,11 @@ import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 import static org.springframework.http.HttpMethod.GET;
-import static org.springframework.social.test.client.RequestMatchers.method;
-import static org.springframework.social.test.client.RequestMatchers.requestTo;
-import static org.springframework.social.test.client.ResponseCreators.withResponse;
+import static org.springframework.http.MediaType.APPLICATION_JSON;
+import static org.springframework.test.web.client.match.RequestMatchers.method;
+import static org.springframework.test.web.client.match.RequestMatchers.requestTo;
+import static org.springframework.test.web.client.response.ResponseCreators.withSuccess;
+
 
 /**
  * @author Umut Utkan
@@ -21,7 +23,7 @@ public class MetaApiTemplateTest extends AbstractSalesforceTest {
     public void getApiVersions() {
         mockServer.expect(requestTo("https://na7.salesforce.com/services/data"))
                 .andExpect(method(GET))
-                .andRespond(withResponse(loadResource("versions.json"), responseHeaders));
+                .andRespond(withSuccess(loadResource("versions.json"), APPLICATION_JSON).headers(responseHeaders));
         List<ApiVersion> versions = salesforce.apiOperations().getVersions();
         assertEquals(4, versions.size());
         assertEquals("Winter '12", versions.get(3).getLabel());
@@ -33,7 +35,7 @@ public class MetaApiTemplateTest extends AbstractSalesforceTest {
     public void getServices() {
         mockServer.expect(requestTo("https://na7.salesforce.com/services/data/v23.0"))
                 .andExpect(method(GET))
-                .andRespond(withResponse(loadResource("services.json"), responseHeaders));
+                .andRespond(withSuccess(loadResource("services.json"), APPLICATION_JSON).headers(responseHeaders));
         Map<String, String> services = salesforce.apiOperations().getServices("23.0");
         assertEquals(6, services.size());
         assertEquals("/services/data/v23.0/sobjects", services.get("sobjects"));

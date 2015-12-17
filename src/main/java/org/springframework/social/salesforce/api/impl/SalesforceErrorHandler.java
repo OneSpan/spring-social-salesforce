@@ -1,10 +1,10 @@
 package org.springframework.social.salesforce.api.impl;
 
-import org.codehaus.jackson.JsonFactory;
-import org.codehaus.jackson.JsonParseException;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.map.type.CollectionType;
-import org.codehaus.jackson.map.type.TypeFactory;
+import com.fasterxml.jackson.core.JsonFactory;
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.type.CollectionType;
+import com.fasterxml.jackson.databind.type.TypeFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.social.*;
@@ -67,7 +67,7 @@ public class SalesforceErrorHandler extends DefaultResponseErrorHandler {
         ObjectMapper mapper = new ObjectMapper(new JsonFactory());
         try {
             CollectionType listType = TypeFactory.defaultInstance().constructCollectionType(List.class, Map.class);
-            List<Map<String, Object>> errorList = (List<Map<String, Object>>) mapper.readValue(response.getBody(), listType);
+            List<Map<String, Object>> errorList = mapper.readValue(response.getBody(), listType);
             if (errorList.size() > 0) {
                 return errorList.get(0);
             }

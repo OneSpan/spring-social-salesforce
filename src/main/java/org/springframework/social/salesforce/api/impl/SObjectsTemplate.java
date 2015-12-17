@@ -1,6 +1,6 @@
 package org.springframework.social.salesforce.api.impl;
 
-import org.codehaus.jackson.JsonNode;
+import com.fasterxml.jackson.databind.JsonNode;
 import org.springframework.http.*;
 import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.social.salesforce.api.SObjectDetail;
@@ -9,7 +9,6 @@ import org.springframework.social.salesforce.api.SObjectSummary;
 import org.springframework.social.salesforce.api.Salesforce;
 import org.springframework.social.support.URIBuilder;
 import org.springframework.util.StringUtils;
-import org.springframework.web.client.HttpMessageConverterExtractor;
 import org.springframework.web.client.ResponseExtractor;
 import org.springframework.web.client.RestTemplate;
 
@@ -69,11 +68,11 @@ public class SObjectsTemplate extends AbstractSalesForceOperations<Salesforce> i
         requireAuthorization();
         return restTemplate.execute(api.getBaseUrl() + "/v23.0/sobjects/{name}/{id}/{field}",
                 HttpMethod.GET, null, new ResponseExtractor<InputStream>() {
-            @Override
-            public InputStream extractData(ClientHttpResponse response) throws IOException {
-                return response.getBody();
-            }
-        }, name, id, field);
+                    @Override
+                    public InputStream extractData(ClientHttpResponse response) throws IOException {
+                        return response.getBody();
+                    }
+                }, name, id, field);
     }
 
     @Override
