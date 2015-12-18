@@ -8,7 +8,7 @@
     <packaging>jar</packaging>
 
     <name>spring-social-salesforce</name>
-    <url>https://github.com/umut/spring-social-salesforce</url>
+    <url>https://github.com/silanis/spring-social-salesforce</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -37,12 +37,6 @@
             <scope>test</scope>
         </dependency>
 
-        <!--<dependency>-->
-            <!--<groupId>org.springframework.social</groupId>-->
-            <!--<artifactId>spring-social-test</artifactId>-->
-            <!--<version>${spring-social-test.version}</version>-->
-            <!--<scope>test</scope>-->
-        <!--</dependency>-->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -66,28 +60,26 @@
     </build>
 
     <repositories>
-         <repository>
-             <id>org.springframework.maven.release</id>
-             <name>Spring Maven Release Repository</name>
-             <url>http://maven.springframework.org/release</url>
-             <releases><enabled>true</enabled></releases>
-             <snapshots><enabled>false</enabled></snapshots>
-         </repository>
+        <repository>
+            <id>org.springframework.maven.release</id>
+            <name>Spring Maven Release Repository</name>
+            <url>http://maven.springframework.org/release</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
 
-         <repository>
-             <id>org.springframework.maven.snapshot</id>
-             <name>Spring Maven Snapshot Repository</name>
-             <url>http://maven.springframework.org/snapshot</url>
-             <releases><enabled>false</enabled></releases>
-             <snapshots><enabled>true</enabled></snapshots>
-         </repository>
-
-         <repository>
-             <id>org.springframework.maven.milestone</id>
-             <name>Spring Maven Milestone Repository</name>
-             <url>http://maven.springframework.org/milestone</url>
-             <snapshots><enabled>false</enabled></snapshots>
-         </repository>
+        <repository>
+            <id>org.springframework.maven.milestone</id>
+            <name>Spring Maven Milestone Repository</name>
+            <url>http://maven.springframework.org/milestone</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
     </repositories>
 
     <distributionManagement>

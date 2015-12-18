@@ -3,8 +3,6 @@ package org.springframework.social.salesforce.api.impl;
 import org.junit.Before;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
 import org.springframework.test.web.client.MockRestServiceServer;
 
 /**
@@ -18,18 +16,14 @@ abstract public class AbstractSalesforceTest {
 
     protected MockRestServiceServer mockServer;
 
-    protected HttpHeaders responseHeaders;
-
-
     @Before
     public void setup() {
         salesforce = new SalesforceTemplate("ACCESS_TOKEN");
         salesforce.setInstanceUrl("https://na7.salesforce.com");
         mockServer = MockRestServiceServer.createServer(salesforce.getRestTemplate());
-        responseHeaders = new HttpHeaders();
-        responseHeaders.setContentType(MediaType.APPLICATION_JSON);
         unauthorizedSalesforce = new SalesforceTemplate();
-        // create a mock server just to avoid hitting real twitter if something gets past the authorization check
+
+        // create a mock server just to avoid hitting real salesforce if something gets past the authorization check
         MockRestServiceServer.createServer(unauthorizedSalesforce.getRestTemplate());
     }
 

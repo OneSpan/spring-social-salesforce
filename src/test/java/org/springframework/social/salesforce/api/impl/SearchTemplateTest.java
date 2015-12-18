@@ -21,7 +21,7 @@ public class SearchTemplateTest extends AbstractSalesforceTest {
     public void search() {
         mockServer.expect(requestTo("https://na7.salesforce.com/services/data/v23.0/search?q=FIND+%7Bxxx*%7D+IN+ALL+FIELDS+RETURNING+Contact%2C+Account"))
                 .andExpect(method(GET))
-                .andRespond(withSuccess(loadResource("search.json"), APPLICATION_JSON).headers(responseHeaders));
+                .andRespond(withSuccess(loadResource("search.json"), APPLICATION_JSON));
         List<ResultItem> results = salesforce.searchOperations().search("FIND {xxx*} IN ALL FIELDS RETURNING Contact, Account");
         assertEquals(4, results.size());
         assertEquals("Contact", results.get(0).getType());

@@ -23,7 +23,7 @@ public class MetaApiTemplateTest extends AbstractSalesforceTest {
     public void getApiVersions() {
         mockServer.expect(requestTo("https://na7.salesforce.com/services/data"))
                 .andExpect(method(GET))
-                .andRespond(withSuccess(loadResource("versions.json"), APPLICATION_JSON).headers(responseHeaders));
+                .andRespond(withSuccess(loadResource("versions.json"), APPLICATION_JSON));
         List<ApiVersion> versions = salesforce.apiOperations().getVersions();
         assertEquals(4, versions.size());
         assertEquals("Winter '12", versions.get(3).getLabel());
@@ -35,7 +35,7 @@ public class MetaApiTemplateTest extends AbstractSalesforceTest {
     public void getServices() {
         mockServer.expect(requestTo("https://na7.salesforce.com/services/data/v23.0"))
                 .andExpect(method(GET))
-                .andRespond(withSuccess(loadResource("services.json"), APPLICATION_JSON).headers(responseHeaders));
+                .andRespond(withSuccess(loadResource("services.json"), APPLICATION_JSON));
         Map<String, String> services = salesforce.apiOperations().getServices("23.0");
         assertEquals(6, services.size());
         assertEquals("/services/data/v23.0/sobjects", services.get("sobjects"));
