@@ -3,7 +3,18 @@ package org.springframework.social.salesforce.api.impl.json;
 import com.fasterxml.jackson.core.Version;
 import com.fasterxml.jackson.databind.Module;
 import com.fasterxml.jackson.databind.module.SimpleModule;
-import org.springframework.social.salesforce.api.*;
+import org.springframework.social.salesforce.api.ApiVersion;
+import org.springframework.social.salesforce.api.Field;
+import org.springframework.social.salesforce.api.Photo;
+import org.springframework.social.salesforce.api.PickListEntry;
+import org.springframework.social.salesforce.api.QueryResult;
+import org.springframework.social.salesforce.api.RecordTypeInfo;
+import org.springframework.social.salesforce.api.Relationship;
+import org.springframework.social.salesforce.api.ResultItem;
+import org.springframework.social.salesforce.api.SObjectDetail;
+import org.springframework.social.salesforce.api.SObjectSummary;
+import org.springframework.social.salesforce.api.SalesforceProfile;
+import org.springframework.social.salesforce.api.Status;
 
 /**
  * Jackson module for api version v23.0.

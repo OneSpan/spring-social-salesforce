@@ -9,7 +9,9 @@ import static org.junit.Assert.assertNotNull;
 import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.http.HttpMethod.POST;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
-import static org.springframework.test.web.client.match.RequestMatchers.*;
+import static org.springframework.test.web.client.match.RequestMatchers.content;
+import static org.springframework.test.web.client.match.RequestMatchers.method;
+import static org.springframework.test.web.client.match.RequestMatchers.requestTo;
 import static org.springframework.test.web.client.response.ResponseCreators.withSuccess;
 
 
