@@ -107,5 +107,11 @@
         </repository>
         <downloadUrl>http://repository.silanis.com/content/groups/libs-release</downloadUrl>
     </distributionManagement>
+    <scm>
+        <connection>scm:git:git@github.com:silanis/spring-social-salesforce.git</connection>
+        <url>scm:git:git@github.com:silanis/spring-social-salesforce.git</url>
+        <developerConnection>scm:git:git@github.com:silanis/spring-social-salesforce.git</developerConnection>
+        <tag>spring-social-salesforce-@{project.version}</tag>
+    </scm>
 
 </project>
