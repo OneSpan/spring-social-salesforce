@@ -15,6 +15,7 @@ import org.springframework.social.oauth2.AbstractOAuth2ApiBinding;
 import org.springframework.social.oauth2.OAuth2Version;
 import org.springframework.social.salesforce.api.ApiOperations;
 import org.springframework.social.salesforce.api.ChatterOperations;
+import org.springframework.social.salesforce.api.IdentityOperations;
 import org.springframework.social.salesforce.api.QueryOperations;
 import org.springframework.social.salesforce.api.RecentOperations;
 import org.springframework.social.salesforce.api.SObjectOperations;
@@ -38,22 +39,19 @@ public class SalesforceTemplate extends AbstractOAuth2ApiBinding implements Sale
 
     private static final String INSTANCE_URL = "https://na1.salesforce.com";
 
-    private String instanceUrl;
-
     private ObjectMapper objectMapper;
 
+    private String instanceUrl;
+    private String profileUrl;
+
+
     private ApiOperations apiOperations;
-
     private ChatterOperations chatterOperations;
-
     private QueryOperations queryOperations;
-
     private RecentOperations recentOperations;
-
     private SearchOperations searchOperations;
-
     private SObjectOperations sObjectsOperations;
-
+    private IdentityOperations identityOperations;
 
     public SalesforceTemplate() {
         initialize();
@@ -100,6 +98,11 @@ public class SalesforceTemplate extends AbstractOAuth2ApiBinding implements Sale
         return sObjectsOperations;
     }
 
+    @Override
+    public IdentityOperations identityOperations() {
+        return identityOperations;
+    }
+
     private void initialize() {
         apiOperations = new ApiTemplate(this, getRestTemplate());
         chatterOperations = new ChatterTemplate(this, getRestTemplate());
@@ -107,6 +110,7 @@ public class SalesforceTemplate extends AbstractOAuth2ApiBinding implements Sale
         recentOperations = new RecentTemplate(this, getRestTemplate());
         searchOperations = new SearchTemplate(this, getRestTemplate());
         sObjectsOperations = new SObjectsTemplate(this, getRestTemplate());
+        identityOperations = new IdentityTemplate(this, getRestTemplate());
     }
 
     @Override
@@ -168,4 +172,12 @@ public class SalesforceTemplate extends AbstractOAuth2ApiBinding implements Sale
         this.instanceUrl = instanceUrl;
     }
 
+    @Override
+    public String getProfileUrl() {
+        return profileUrl;
+    }
+
+    public void setProfileUrl(String profileUrl) {
+        this.profileUrl = profileUrl;
+    }
 }

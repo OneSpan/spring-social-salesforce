@@ -33,10 +33,10 @@ public class SalesforceOAuth2Template extends OAuth2Template {
     static final String ENDPOINT = "endpoint";
     private static final String UTF_8 = "UTF8";
 
-
-    private String instanceUrl = null;
     private final String baseUrl;
 
+    private String instanceUrl = null;
+    private String profileUrl = null;
 
     public SalesforceOAuth2Template(String clientId, String clientSecret, String baseUrl) {
         super(clientId, clientSecret, baseUrl + AUTHORIZE_PATH, null, baseUrl + TOKEN_PATH);
@@ -83,7 +83,7 @@ public class SalesforceOAuth2Template extends OAuth2Template {
     @Override
     protected AccessGrant createAccessGrant(String accessToken, String scope, String refreshToken, Long expiresIn, Map<String, Object> response) {
         this.instanceUrl = (String) response.get("instance_url");
-
+        this.profileUrl = (String) response.get("id");
         return super.createAccessGrant(accessToken, scope, refreshToken, expiresIn, response);
     }
 
@@ -91,9 +91,12 @@ public class SalesforceOAuth2Template extends OAuth2Template {
         return uri.getScheme() + "://";
     }
 
-
     public String getInstanceUrl() {
         return instanceUrl;
+    }
+
+    public String getProfileUrl() {
+        return profileUrl;
     }
 
     private String verifyURLEndsWithSlash(String endpointUrl) {

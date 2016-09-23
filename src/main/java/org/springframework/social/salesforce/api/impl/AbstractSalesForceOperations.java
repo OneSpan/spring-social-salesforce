@@ -22,6 +22,4 @@ public class AbstractSalesForceOperations<T extends ApiBinding> {
         }
     }
 
-    protected static String BASE_URL = "https://na7.salesforce.com/services/data";
-
 }

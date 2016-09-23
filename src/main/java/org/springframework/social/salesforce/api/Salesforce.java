@@ -26,6 +26,8 @@ public interface Salesforce extends ApiBinding {
 
     SObjectOperations sObjectsOperations();
 
+    IdentityOperations identityOperations();
+
     <T> List<T> readList(JsonNode jsonNode, Class<T> type);
 
     <T> T readObject(JsonNode jsonNode, Class<T> type);
@@ -34,4 +36,5 @@ public interface Salesforce extends ApiBinding {
 
     String getInstanceUrl();
 
+    String getProfileUrl();
 }

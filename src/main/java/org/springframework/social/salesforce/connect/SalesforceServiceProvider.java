@@ -20,12 +20,21 @@ public class SalesforceServiceProvider extends AbstractOAuth2ServiceProvider<Sal
 
 
     public Salesforce getApi(String accessToken) {
-        SalesforceTemplate template = new SalesforceTemplate(accessToken);
+        return configureTemplate(new SalesforceTemplate(accessToken));
+    }
 
+    private SalesforceTemplate configureTemplate(SalesforceTemplate template) {
         // gets the returned instance url and sets to Salesforce template as base url.
-        String instanceUrl = ((SalesforceOAuth2Template) getOAuthOperations()).getInstanceUrl();
+        final SalesforceOAuth2Template oAuthOperations = (SalesforceOAuth2Template) getOAuthOperations();
+
+        String instanceUrl = oAuthOperations.getInstanceUrl();
         if (instanceUrl != null) {
             template.setInstanceUrl(instanceUrl);
+        }
+
+        final String profileUrl = oAuthOperations.getProfileUrl();
+        if (profileUrl != null) {
+            template.setProfileUrl(profileUrl);
         }
 
         return template;

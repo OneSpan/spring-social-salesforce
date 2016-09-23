@@ -10,6 +10,8 @@ import org.springframework.test.web.client.MockRestServiceServer;
  */
 abstract public class AbstractSalesforceTest {
 
+    protected static final String PROFILE_URL = "https://login.salesforce.com/id/AN_ORGANIZATION_ID/A_USER_ID";
+
     protected SalesforceTemplate salesforce;
 
     protected SalesforceTemplate unauthorizedSalesforce;
@@ -20,6 +22,7 @@ abstract public class AbstractSalesforceTest {
     public void setup() {
         salesforce = new SalesforceTemplate("ACCESS_TOKEN");
         salesforce.setInstanceUrl("https://na7.salesforce.com");
+        salesforce.setProfileUrl(PROFILE_URL);
         mockServer = MockRestServiceServer.createServer(salesforce.getRestTemplate());
         unauthorizedSalesforce = new SalesforceTemplate();
 
