@@ -3,7 +3,11 @@
 
     <groupId>org.springframework.social</groupId>
     <artifactId>spring-social-salesforce</artifactId>
+<<<<<<< HEAD
     <version>1.1.9</version>
+=======
+    <version>1.1.11-SNAPSHOT</version>
+>>>>>>> 6eccc424cd0d2cc14bb631c3358ade3f3e6e1be0
     <packaging>jar</packaging>
 
     <name>spring-social-salesforce</name>
