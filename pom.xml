@@ -3,7 +3,7 @@
 
     <groupId>org.springframework.social</groupId>
     <artifactId>spring-social-salesforce</artifactId>
-    <version>1.1.11</version>
+    <version>1.1.12-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>spring-social-salesforce</name>
@@ -111,7 +111,7 @@
         <connection>scm:git:git@github.com:silanis/spring-social-salesforce.git</connection>
         <url>scm:git:git@github.com:silanis/spring-social-salesforce.git</url>
         <developerConnection>scm:git:git@github.com:silanis/spring-social-salesforce.git</developerConnection>
-        <tag>release_1.1.11</tag>
+        <tag>spring-social-salesforce-@{project.version}</tag>
     </scm>
 
 </project>
