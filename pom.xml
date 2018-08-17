@@ -7,7 +7,7 @@
     <packaging>jar</packaging>
 
     <name>spring-social-salesforce</name>
-    <url>https://github.com/esignlive/spring-social-salesforce</url>
+    <url>https://github.com/silanis/spring-social-salesforce</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -135,9 +135,9 @@
     <distributionManagement>
         <repository>
             <id>silanis-releases</id>
-            <url>http://repository.silanis.com/content/repositories/libs-release-local</url>
+            <url>http://repository.silanis.com/repository/libs-release-local/</url>
         </repository>
-        <downloadUrl>http://repository.silanis.com/content/groups/libs-release</downloadUrl>
+        <downloadUrl>http://repository.silanis.com/repository/libs-release/</downloadUrl>
     </distributionManagement>
     <scm>
         <connection>scm:git:git@github.com:silanis/spring-social-salesforce.git</connection>
