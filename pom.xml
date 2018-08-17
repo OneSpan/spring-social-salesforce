@@ -3,21 +3,18 @@
 
     <groupId>org.springframework.social</groupId>
     <artifactId>spring-social-salesforce</artifactId>
-<<<<<<< HEAD
-    <version>1.1.9</version>
-=======
     <version>1.1.11-SNAPSHOT</version>
->>>>>>> 6eccc424cd0d2cc14bb631c3358ade3f3e6e1be0
     <packaging>jar</packaging>
 
     <name>spring-social-salesforce</name>
-    <url>https://github.com/silanis/spring-social-salesforce</url>
+    <url>https://github.com/esignlive/spring-social-salesforce</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring-social-core.version>1.1.4.RELEASE</spring-social-core.version>
         <spring-test.version>1.0.0.M2</spring-test.version>
         <jackson.version>2.9.6</jackson.version>
+        <additionalparam>-Xdoclint:none</additionalparam>
     </properties>
 
     <dependencies>
@@ -77,13 +74,6 @@
                     <target>1.6</target>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <configuration>
-                    <additionalparam>-Xdoclint:none</additionalparam>
-                </configuration>
-            </plugin>
         </plugins>
     </build>
 
@@ -121,7 +111,7 @@
         <connection>scm:git:git@github.com:silanis/spring-social-salesforce.git</connection>
         <url>scm:git:git@github.com:silanis/spring-social-salesforce.git</url>
         <developerConnection>scm:git:git@github.com:silanis/spring-social-salesforce.git</developerConnection>
-        <tag>release_1.1.9</tag>
+        <tag>spring-social-salesforce-@{project.version}</tag>
     </scm>
 
 </project>
