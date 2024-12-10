@@ -29,7 +29,7 @@ public class SearchTemplate extends AbstractSalesForceOperations<Salesforce> imp
     @Override
     public List<ResultItem> search(String soslQuery) {
         requireAuthorization();
-        URI uri = URIBuilder.fromUri(api.getBaseUrl() + "/v23.0/search").queryParam("q", soslQuery).build();
+        URI uri = URIBuilder.fromUri(api.getBaseUrl() + "/v37.0/search").queryParam("q", soslQuery).build();
         JsonNode arr = restTemplate.getForObject(uri, JsonNode.class);
         return api.readList(arr, ResultItem.class);
     }

@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * {@see org.springframework.social.salesforce.api.Status} Mixin for api v23.0.
+ * {@see org.springframework.social.salesforce.api.Status} Mixin for api v37.0.
  *
  * @author Umut Utkan
  */

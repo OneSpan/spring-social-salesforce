@@ -9,7 +9,7 @@ import org.springframework.social.salesforce.api.Relationship;
 import java.util.List;
 
 /**
- * {@see org.springframework.social.salesforce.api.SObjectDetail} Mixin for api v23.0.
+ * {@see org.springframework.social.salesforce.api.SObjectDetail} Mixin for api v37.0.
  *
  * @author Umut Utkan
  */

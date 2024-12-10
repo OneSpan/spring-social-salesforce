@@ -8,7 +8,7 @@ import org.springframework.social.salesforce.api.PickListEntry;
 import java.util.List;
 
 /**
- * {@see org.springframework.social.salesforce.api.Field} Mixin for api v23.0.
+ * {@see org.springframework.social.salesforce.api.Field} Mixin for api v37.0.
  *
  * @author Umut Utkan
  */

@@ -3,7 +3,7 @@ package org.springframework.social.salesforce.api.impl.json;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 /**
- * {@see org.springframework.social.salesforce.api.ResultItem} Mixin for api v23.0.
+ * {@see org.springframework.social.salesforce.api.ResultItem} Mixin for api v37.0.
  *
  * @author Umut Utkan
  */
