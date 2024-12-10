@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Map;
 
 /**
- * {@see org.springframework.social.salesforce.api.SObjectSummary} Mixin for api v23.0.
+ * {@see org.springframework.social.salesforce.api.SObjectSummary} Mixin for api v37.0.
  *
  * @author Umut Utkan
  */

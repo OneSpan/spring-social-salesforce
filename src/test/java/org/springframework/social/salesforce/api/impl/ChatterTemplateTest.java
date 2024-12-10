@@ -22,7 +22,7 @@ public class ChatterTemplateTest extends AbstractSalesforceTest {
 
     @Test
     public void getProfile() {
-        mockServer.expect(requestTo("https://na7.salesforce.com/services/data/v23.0/chatter/users/me"))
+        mockServer.expect(requestTo("https://na7.salesforce.com/services/data/v37.0/chatter/users/me"))
                 .andExpect(method(GET))
                 .andRespond(withSuccess(loadResource("profile.json"), APPLICATION_JSON));
         SalesforceProfile profile = salesforce.chatterOperations().getUserProfile();
@@ -37,7 +37,7 @@ public class ChatterTemplateTest extends AbstractSalesforceTest {
 
     @Test
     public void getStatus() {
-        mockServer.expect(requestTo("https://na7.salesforce.com/services/data/v23.0/chatter/users/me/status"))
+        mockServer.expect(requestTo("https://na7.salesforce.com/services/data/v37.0/chatter/users/me/status"))
                 .andExpect(method(GET))
                 .andRespond(withSuccess(loadResource("chatter-status.json"), APPLICATION_JSON));
 
@@ -48,7 +48,7 @@ public class ChatterTemplateTest extends AbstractSalesforceTest {
 
     @Test
     public void updateStatus() {
-        mockServer.expect(requestTo("https://na7.salesforce.com/services/data/v23.0/chatter/users/me/status"))
+        mockServer.expect(requestTo("https://na7.salesforce.com/services/data/v37.0/chatter/users/me/status"))
                 .andExpect(method(POST))
                 .andExpect(content().string("text=Updating+status+via+%23spring-social-salesforce%21"))
                 .andRespond(withSuccess(loadResource("chatter-status.json"), APPLICATION_JSON));

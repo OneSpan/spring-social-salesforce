@@ -30,7 +30,7 @@ public class SObjectsTemplateTest extends AbstractSalesforceTest {
 
     @Test
     public void getSObjects() {
-        mockServer.expect(requestTo("https://na7.salesforce.com/services/data/v23.0/sobjects"))
+        mockServer.expect(requestTo("https://na7.salesforce.com/services/data/v37.0/sobjects"))
                 .andExpect(method(GET))
                 .andRespond(withSuccess(loadResource("sobjects.json"), APPLICATION_JSON));
         List<Map> sobjects = salesforce.sObjectsOperations().getSObjects();
@@ -38,12 +38,12 @@ public class SObjectsTemplateTest extends AbstractSalesforceTest {
         assertEquals("Account", sobjects.get(0).get("name"));
         assertEquals("Account", sobjects.get(0).get("label"));
         assertEquals("Accounts", sobjects.get(0).get("labelPlural"));
-        assertEquals("/services/data/v23.0/sobjects/Account", ((Map) sobjects.get(0).get("urls")).get("sobject"));
+        assertEquals("/services/data/v37.0/sobjects/Account", ((Map) sobjects.get(0).get("urls")).get("sobject"));
     }
 
     @Test
     public void getSObject() {
-        mockServer.expect(requestTo("https://na7.salesforce.com/services/data/v23.0/sobjects/Account"))
+        mockServer.expect(requestTo("https://na7.salesforce.com/services/data/v37.0/sobjects/Account"))
                 .andExpect(method(GET))
                 .andRespond(withSuccess(loadResource("account.json"), APPLICATION_JSON));
         SObjectSummary account = salesforce.sObjectsOperations().getSObject("Account");
@@ -53,12 +53,12 @@ public class SObjectsTemplateTest extends AbstractSalesforceTest {
         assertEquals(true, account.isUndeletable());
         assertEquals("001", account.getKeyPrefix());
         assertEquals(false, account.isCustom());
-        assertEquals("/services/data/v23.0/sobjects/Account/{ID}", account.getUrls().get("rowTemplate"));
+        assertEquals("/services/data/v37.0/sobjects/Account/{ID}", account.getUrls().get("rowTemplate"));
     }
 
     @Test
     public void describeSObject() {
-        mockServer.expect(requestTo("https://na7.salesforce.com/services/data/v23.0/sobjects/Account/describe"))
+        mockServer.expect(requestTo("https://na7.salesforce.com/services/data/v37.0/sobjects/Account/describe"))
                 .andExpect(method(GET))
                 .andRespond(withSuccess(loadResource("account_desc.json"), APPLICATION_JSON));
         SObjectDetail account = salesforce.sObjectsOperations().describeSObject("Account");
@@ -75,7 +75,7 @@ public class SObjectsTemplateTest extends AbstractSalesforceTest {
 
     @Test
     public void getBlob() throws IOException {
-        mockServer.expect(requestTo("https://na7.salesforce.com/services/data/v23.0/sobjects/Account/xxx/avatar"))
+        mockServer.expect(requestTo("https://na7.salesforce.com/services/data/v37.0/sobjects/Account/xxx/avatar"))
                 .andExpect(method(GET))
                 .andRespond(withSuccess(new ByteArrayResource("does-not-matter".getBytes("UTF-8")), APPLICATION_JSON));
         BufferedReader reader = new BufferedReader(new InputStreamReader(salesforce.sObjectsOperations().getBlob("Account", "xxx", "avatar")));
@@ -84,7 +84,7 @@ public class SObjectsTemplateTest extends AbstractSalesforceTest {
 
     @Test
     public void testCreate() throws IOException {
-        mockServer.expect(requestTo("https://na7.salesforce.com/services/data/v23.0/sobjects/Lead"))
+        mockServer.expect(requestTo("https://na7.salesforce.com/services/data/v37.0/sobjects/Lead"))
                 .andExpect(method(POST))
                 .andRespond(withSuccess(new ByteArrayResource("{\"Id\" : \"1234\"}".getBytes("UTF-8")), APPLICATION_JSON));
         Map<String, String> fields = new HashMap<String, String>();

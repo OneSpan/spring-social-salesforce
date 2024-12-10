@@ -17,14 +17,14 @@ import org.springframework.social.salesforce.api.SalesforceProfile;
 import org.springframework.social.salesforce.api.Status;
 
 /**
- * Jackson module for api version v23.0.
+ * Jackson module for api version v37.0.
  *
  * @author Umut Utkan
  */
 public class SalesforceModule extends SimpleModule {
 
     public SalesforceModule() {
-        super("SalesforceModule", new Version(23, 0, 0, null));
+        super("SalesforceModule", new Version(37, 0, 0, null));
     }
 
     @Override

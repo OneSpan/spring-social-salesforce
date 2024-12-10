@@ -95,15 +95,6 @@
                 <artifactId>maven-site-plugin</artifactId>
                 <version>3.3</version>
                 <configuration>
-                    <reportPlugins>
-                        <plugin>
-                            <groupId>org.apache.maven.plugins</groupId>
-                            <artifactId>maven-javadoc-plugin</artifactId>
-                            <configuration>
-                                <additionalparam>-Xdoclint:none</additionalparam>
-                            </configuration>
-                        </plugin>
-                    </reportPlugins>
                 </configuration>
             </plugin>
         </plugins>
@@ -113,7 +104,7 @@
         <repository>
             <id>org.springframework.maven.release</id>
             <name>Spring Maven Release Repository</name>
-            <url>http://maven.springframework.org/release</url>
+            <url>https://repo.spring.io/ui/native/release/</url>
             <releases>
                 <enabled>true</enabled>
             </releases>
@@ -125,7 +116,7 @@
         <repository>
             <id>org.springframework.maven.milestone</id>
             <name>Spring Maven Milestone Repository</name>
-            <url>http://maven.springframework.org/milestone</url>
+            <url>https://repo.spring.io/ui/native/milestone/</url>
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
@@ -135,15 +126,26 @@
     <distributionManagement>
         <repository>
             <id>silanis-releases</id>
-            <url>http://repository.silanis.com/repository/libs-release-local/</url>
+            <url>http://repository.dev.corp.onespan.com/repository/libs-release-local/</url>
         </repository>
-        <downloadUrl>http://repository.silanis.com/repository/libs-release/</downloadUrl>
+        <downloadUrl>http://repository.dev.corp.onespan.com/repository/libs-release/</downloadUrl>
     </distributionManagement>
     <scm>
-        <connection>scm:git:git@github.com:silanis/spring-social-salesforce.git</connection>
-        <url>scm:git:git@github.com:silanis/spring-social-salesforce.git</url>
-        <developerConnection>scm:git:git@github.com:silanis/spring-social-salesforce.git</developerConnection>
+        <connection>scm:git:git@github.com:OneSpan/spring-social-salesforce.git</connection>
+        <url>scm:git:git@github.com:OneSpan/spring-social-salesforce.git</url>
+        <developerConnection>scm:git:git@github.com:OneSpan/spring-social-salesforce.git</developerConnection>
         <tag>spring-social-salesforce-@{project.version}</tag>
     </scm>
-
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+<!--                <version>3.3.0</version>-->
+                <configuration>
+                    <additionalparam>-Xdoclint:none</additionalparam>
+                </configuration>
+            </plugin>
+        </plugins>
+    </reporting>
 </project>
