@@ -95,6 +95,15 @@
                 <artifactId>maven-site-plugin</artifactId>
                 <version>3.3</version>
                 <configuration>
+                    <reportPlugins>
+                        <plugin>
+                            <groupId>org.apache.maven.plugins</groupId>
+                            <artifactId>maven-javadoc-plugin</artifactId>
+                            <configuration>
+                                <additionalparam>-Xdoclint:none</additionalparam>
+                            </configuration>
+                        </plugin>
+                    </reportPlugins>
                 </configuration>
             </plugin>
         </plugins>
@@ -104,7 +113,7 @@
         <repository>
             <id>org.springframework.maven.release</id>
             <name>Spring Maven Release Repository</name>
-            <url>https://repo.spring.io/ui/native/release/</url>
+            <url>http://repo.spring.io/release/</url>
             <releases>
                 <enabled>true</enabled>
             </releases>
@@ -116,7 +125,7 @@
         <repository>
             <id>org.springframework.maven.milestone</id>
             <name>Spring Maven Milestone Repository</name>
-            <url>https://repo.spring.io/ui/native/milestone/</url>
+            <url>http://repo.spring.io/milestone/</url>
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
@@ -136,16 +145,20 @@
         <developerConnection>scm:git:git@github.com:OneSpan/spring-social-salesforce.git</developerConnection>
         <tag>spring-social-salesforce-@{project.version}</tag>
     </scm>
-    <reporting>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-<!--                <version>3.3.0</version>-->
-                <configuration>
-                    <additionalparam>-Xdoclint:none</additionalparam>
-                </configuration>
-            </plugin>
-        </plugins>
-    </reporting>
+
+
+<!--    <reporting>-->
+<!--        <plugins>-->
+<!--            <plugin>-->
+<!--                <groupId>org.apache.maven.plugins</groupId>-->
+<!--                <artifactId>maven-javadoc-plugin</artifactId>-->
+<!--&lt;!&ndash;                <version>3.3.0</version>&ndash;&gt;-->
+<!--                <configuration>-->
+<!--                    <additionalparam>-Xdoclint:none</additionalparam>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
+<!--        </plugins>-->
+<!--    </reporting>-->
+
+
 </project>
