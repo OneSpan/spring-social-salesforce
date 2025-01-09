@@ -102,6 +102,15 @@
                 <artifactId>maven-site-plugin</artifactId>
                 <version>3.3</version>
                 <configuration>
+                    <reportPlugins>
+                        <plugin>
+                            <groupId>org.apache.maven.plugins</groupId>
+                            <artifactId>maven-javadoc-plugin</artifactId>
+                            <configuration>
+                                <additionalparam>-Xdoclint:none</additionalparam>
+                            </configuration>
+                        </plugin>
+                    </reportPlugins>
                 </configuration>
             </plugin>
         </plugins>
@@ -143,16 +152,6 @@
         <developerConnection>scm:git:git@github.com:OneSpan/spring-social-salesforce.git</developerConnection>
         <tag>spring-social-salesforce-@{project.version}</tag>
     </scm>
-    <reporting>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-<!--                <version>3.3.0</version>-->
-                <configuration>
-                    <additionalparam>-Xdoclint:none</additionalparam>
-                </configuration>
-            </plugin>
-        </plugins>
-    </reporting>
+
+
 </project>
