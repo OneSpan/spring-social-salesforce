@@ -36,7 +36,8 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-test-mvc</artifactId>
             <version>${spring-test.version}</version>
-            <scope>test</scope>
+            <scope>system</scope>
+            <systemPath>${basedir}/libs/spring-test-mvc-1.0.0.M2.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -108,29 +109,6 @@
             </plugin>
         </plugins>
     </build>
-
-    <repositories>
-        <repository>
-            <id>org.springframework.maven.release</id>
-            <name>Spring Maven Release Repository</name>
-            <url>http://maven.springframework.org/release</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-
-        <repository>
-            <id>org.springframework.maven.milestone</id>
-            <name>Spring Maven Milestone Repository</name>
-            <url>http://maven.springframework.org/milestone</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
 
     <distributionManagement>
         <repository>
